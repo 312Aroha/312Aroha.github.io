@@ -80,12 +80,12 @@ var welcome = {
     type: 'html-keyboard-response',
     stimulus: `
     <p style="font: bold 32pt 微软雅黑; color: #B22222">
-    欢迎参与我们的实验</p>
+    欢迎参与我们的研究</p>
     <p style="font: 20pt 微软雅黑; color: black"><br/>
     <按空格键继续><br/>
-    <b>实验过程中请勿退出全屏</b><br/><br/></p>
+    <b>过程中请勿退出全屏</b><br/><br/></p>
     <p style="font: 20pt 华文中宋; color: grey">
-    中国科学院心理研究所<br/>2020年</p>`,
+    华东师范大学心理与认知科学学院<br/>2020年</p>`,
     choices: [' '],
     post_trial_gap: 100
 }
@@ -93,7 +93,7 @@ var welcome = {
 var warmup = {
     type: 'html-button-response',
     stimulus: '<p>请做好准备……</p>',
-    choices: ['<span id="timer">5</span>秒后继续'],
+    choices: ['<span id="timer">1</span>秒后继续'],
     button_html: btn_html_timer
 }
 
@@ -145,10 +145,22 @@ var close_fullscreen = {
 
 /* Blocks: Surveys */
 
+
+var Subject_Number = {
+    type: 'survey-html-form',
+    data: {varname: 'Subject_Number'},
+    preamble: '您的编号',
+    html:`
+    <p><input name = "Q0" type = "number" placeholder = "0001" min=0001 max=1199 
+    oninput="if(value.length>4) value=value.slice(0,4)" required /></p>`,
+    button_label: '继续',
+    on_finish: function(data) { addRespFromSurvey(data) }
+}
+
 var Sex = {
     type: 'html-button-response',
     data: { varname: 'Sex' },
-    stimulus: '你的性别',
+    stimulus: '您的性别',
     choices: ['男', '女', '其他'],
     on_finish: function(data) { addRespFromButton(data) }
 }
@@ -156,14 +168,72 @@ var Sex = {
 var Age = {
     type: 'survey-html-form',
     data: { varname: 'Age' },
-    preamble: '你的年龄',
+    preamble: '您的年龄',
     html: `
-    <p><input name="Q0" type="number" placeholder="15~99" min=15 max=99
+    <p><input name="Q0" type="number" placeholder="18~99" min=18 max=99
     oninput="if(value.length>2) value=value.slice(0,2)" required /></p>`,
     button_label: '继续',
     on_finish: function(data) { addRespFromSurvey(data) }
 }
 
+/* 加入“专业 Major” */
+
+var Major = {
+    type: 'survey-html-form',
+    data: { varname: 'Major' },
+    preamble: '您的专业',
+    html: `
+    <p><select name="Q0" size=10>
+    <option>哲学</option>
+    <option>经济学</option>
+    <option>法学</option>
+    <option>教育学</option>
+    <option>文学</option>
+    <option>历史学</option>
+    <option>理学</option>
+    <option>工学</option>
+    <option>农学</option>
+    <option>医学</option>
+    <option>军事学</option>
+    <option>管理学</option>
+    <option>艺术学</option>
+    <option>其他</option>
+    </select></p>`,
+    button_label: '继续',
+    on_finish: function(data) { addRespFromSurvey(data) }
+}
+
+var Now_Level = {
+    type: 'survey-html-form',
+    data: { varname: 'Now_Level' },
+    preamble: '您目前的受教育水平',
+    html: `
+    <p><select name="Q0" size=10>
+    <option>本科</option>
+    <option>硕士</option>
+    <option>博士</option>
+    <option>博士以上</option>
+    </select></p>`,
+    button_label: '继续',
+    on_finish: function(data) { addRespFromSurvey(data) }
+}
+
+var Expect_Level = {
+    type: 'survey-html-form',
+    data: { varname: 'Expect_Level' },
+    preamble: '您期望的受教育水平',
+    html: `
+    <p><select name="Q0" size=10>
+    <option>本科</option>
+    <option>硕士</option>
+    <option>博士</option>
+    <option>博士以上</option>
+    </select></p>`,
+    button_label: '继续',
+    on_finish: function(data) { addRespFromSurvey(data) }
+}
+
+/* 删除生日 
 var Birth = {
     type: 'survey-html-form',
     data: { varname: 'Birth' },
@@ -172,7 +242,7 @@ var Birth = {
     button_label: '继续',
     on_finish: function(data) { addRespFromSurvey(data) }
 }
-
+/* 删除邮箱 
 var Email = {
     type: 'survey-html-form',
     data: { varname: 'Email' },
@@ -181,7 +251,7 @@ var Email = {
     button_label: '继续',
     on_finish: function(data) { addRespFromSurvey(data) }
 }
-
+/* 删除学校
 var School = {
     type: 'survey-html-form',
     data: { varname: 'School' },
@@ -197,7 +267,7 @@ var School = {
     button_label: '继续',
     on_finish: function(data) { addRespFromSurvey(data) }
 }
-
+/* 删除语言
 var Language = {
     type: 'survey-multi-select',
     data: { varname: 'Language' },
@@ -210,7 +280,7 @@ var Language = {
     button_label: '继续',
     on_finish: function(data) { replaceComma(data) }
 }
-
+/* 删除名字评价
 var NameLiking = {
     type: 'html-slider-response',
     data: { varname: 'NameLiking' },
@@ -224,6 +294,7 @@ var NameLiking = {
     button_label: '继续',
     require_movement: true
 }
+*/
 
 var SWLS = {
     timeline: [{
@@ -275,6 +346,7 @@ var RSES = {
     ],
     randomize_order: false
 }
+
 
 var OpenEnded = {
     type: 'survey-text',
@@ -575,11 +647,12 @@ var debrief2 = {
 }
 
 
-/* Combine Timelines */
+/* 组合 Timelines */
+/* 将Birth删除，加上“专业” */
 
 var demographics = {
     timeline: [
-        Sex, Age, Birth, Language, School, Email,
+        Subject_Number, Sex, Age, Major, Now_Level, Expect_Level
     ]
 }
 
@@ -616,7 +689,7 @@ var main_timeline = [
 ]
 
 
-/* Launch jsPsych */
+/* 运行 jsPsych */
 
 jsPsych.init({
     timeline: main_timeline,
