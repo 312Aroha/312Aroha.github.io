@@ -116,7 +116,7 @@ var instr_5 = {
     pages: [
         `<p style="text-align: left">
         指导语：<br/>
-        下面有一系列陈述，<br/>
+        下面有36条陈述，<br/>
         请表明您对这些陈述的同意程度。<br/><br/>
         1 = 非常不同意<br/>
         2 = 比较不同意<br/>
@@ -135,7 +135,7 @@ var instr_6 = {
     pages: [
         `<p style="text-align: left">
         指导语：<br/>
-        下面有一系列陈述，<br/>
+        下面有70条陈述，<br/>
         请表明您对这些陈述的赞同程度。<br/><br/>
         1 = 非常不赞同<br/>
         2 = 不赞同<br/>
@@ -158,14 +158,15 @@ var close_fullscreen = {
 
 
 /* Blocks: Surveys */
-
+    
+        
 var Subject_Number = {
     type: 'survey-html-form',
     data: {varname: 'Subject_Number'},
     preamble: '您的编号',
     html:`
-    <p><input name = "Q0" type = "number" placeholder = "0001" min=0001 max=1199 
-    oninput="if(value.length>4) value=value.slice(0,4)" required /></p>`,
+    <p><input name = "Q0" type = "number" placeholder = "4位数字" 
+    oninput="if(value.length>4) value=value.slice(0,4)" required /></p>`,//不知道如何设置至少输入4位数
     button_label: '继续',
     on_finish: function(data) { addRespFromSurvey(data) }
 }
@@ -174,7 +175,7 @@ var Sex = {
     type: 'html-button-response',
     data: { varname: 'Sex' },
     stimulus: '您的性别',
-    choices: ['男', '女', '其他'],
+    choices: ['男', '女'],//删除‘其他’
     on_finish: function(data) { addRespFromButton(data) }
 }
 
@@ -217,14 +218,13 @@ var Major = {
 var Now_Level = {
     type: 'survey-html-form',
     data: { varname: 'Now_Level' },
-    preamble: '您目前的受教育水平',
+    preamble: '您目前的受教育水平<br>', //棒！！可以修改为radio//选项左对齐
     html: `
-    <p><select name="Q0" size=10>
-    <option>本科</option>
-    <option>硕士</option>
-    <option>博士</option>
-    <option>博士以上</option>
-    </select></p>`,
+    <p style="text-align: left"> 
+    <input name="Q0" type="radio" value="本科">本科<br>
+    <input name="Q0" type="radio" value="硕士">硕士<br>
+    <input name="Q0" type="radio" value="博士">博士<br>
+    <input name="Q0" type="radio" value="博士以上">博士以上</p>`,
     button_label: '继续',
     on_finish: function(data) { addRespFromSurvey(data) }
 }
@@ -232,19 +232,18 @@ var Now_Level = {
 var Expect_Level = {
     type: 'survey-html-form',
     data: { varname: 'Expect_Level' },
-    preamble: '您期望的受教育水平',
+    preamble: '您<span style="color:DimGray">期望</span>的受教育水平',//灰色强调“目前” 
     html: `
-    <p><select name="Q0" size=10>
-    <option>本科</option>
-    <option>硕士</option>
-    <option>博士</option>
-    <option>博士以上</option>
-    </select></p>`,
+    <p style="text-align: left"> 
+    <input name="Q0" type="radio" value="本科">本科<br>
+    <input name="Q0" type="radio" value="硕士">硕士<br>
+    <input name="Q0" type="radio" value="博士">博士<br>
+    <input name="Q0" type="radio" value="博士以上">博士以上</p>`,
     button_label: '继续',
     on_finish: function(data) { addRespFromSurvey(data) }
 }
 
-var Big_Five = {
+var BFAS = {
     timeline: [{
         type: 'html-button-response',
         data: jsPsych.timelineVariable('data'),
@@ -254,7 +253,7 @@ var Big_Five = {
         请表明您对该陈述的同意程度<br/>
         （1 = 非常不同意，5 = 非常同意）</p>`,
         choices: ['1', '2', '3', '4', '5'],
-        on_finish: function(data) { addRespFromButtonScale(data, 'Big_Five') },
+        on_finish: function(data) { addRespFromButtonScale(data, 'BFAS') },
         post_trial_gap: 50
     }],
     timeline_variables: [
@@ -295,7 +294,7 @@ var Big_Five = {
         { data: { i:35}, s: '很少陷入沉思。' },
         { data: { i:36}, s: '很少注意到绘画和图片的情感方面。' },
     ],
-    randomize_order: false
+    randomize_order: true
 }
 
 var CCTDI = {
@@ -401,20 +400,6 @@ var OpenEnded = {
 }
 
 
-
-var debrief1 = {
-    type: 'html-keyboard-response',
-    stimulus: function() {
-        return `
-        <p style="text-align: left">
-        结果反馈（问卷部分）：<br/><br/>
-        你的生活满意度：${MEAN('Big_Five').toFixed(1)}（取值范围1~7）<br/>
-        你的自尊水平：${MEAN('CCTDI', rev = [3, 5, 8, 9, 10], likert = [1, 4]).toFixed(1)}（取值范围1~4）<br/><br/>
-        （按任意键继续）</p>`
-    }
-}
-
-
 /* Combine Timelines */
 
 var demographics = {
@@ -426,8 +411,7 @@ var demographics = {
 var surveys = {
     timeline: [
         instr_6, CCTDI,
-        instr_5, Big_Five,
-        debrief1,
+        instr_5, BFAS,
     ]
 }
 
@@ -448,7 +432,7 @@ var main_timeline = [
 jsPsych.init({
     timeline: main_timeline,
     on_finish: function() {
-        jsPsych.data.get().localSave('csv', `data_exp_demo_${subID}.csv`) // download from browser
+        jsPsych.data.get().localSave('csv', `请重命名为您的编号并发给主试.csv`) // download from browser // 把csv后缀改掉
         document.getElementById('jspsych-content').innerHTML += '测验结束，感谢您的参与！'
     }
 })
