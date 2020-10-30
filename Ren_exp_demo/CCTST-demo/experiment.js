@@ -634,14 +634,12 @@ var OpenEnded = {
 
 /* 添加下载提醒 */
 var DownloadReminding = {
-    type: 'image-button-response',
-    stimulus: 'DownloadReminding.png',
-    stimulus_height: '409',
-    stimulus_width:'600',
-    prompt: `
-    <p style="text-align: left">在您点击“完成”按钮后，将会开始下载文件。<br/>
-    请您选择“允许”，并将文件名修改为您的被试编号发送给主试。<br/>
-    再次感谢您的耐心与配合！</p>`,
+    type: 'html-button-response',
+    stimulus: `
+    在您点击“完成”按钮后，将会开始下载文件。<br/>
+    请您允许下载，并将文件名修改为您的编号后发送给主试。<br/><br/>
+    再次感谢您的耐心与配合！
+    <p style="color: DodgerBlue">o(≧v≦)o</p>`,
     choices: ['完成']
 }
 

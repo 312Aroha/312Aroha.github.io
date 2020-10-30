@@ -111,6 +111,7 @@ var instr_1 = {
     button_label_previous: '返回',
     button_label_next: '继续'
 }
+
 var instr_5 = {
     type: 'instructions',
     pages: [
@@ -222,21 +223,19 @@ var OpenEnded = {
         columns: 50,
         required: false
     }],
-    button_label: '继续', //“完成”改为“继续”
+    button_label: '完成',
     on_finish: function(data) { addRespFromSurvey(data) }
 }
 
 
 /* 添加下载提醒 */
 var DownloadReminding = {
-    type: 'image-button-response',
-    stimulus: 'DownloadReminding.png',
-    stimulus_height: '409',
-    stimulus_width:'600',
-    prompt: `
-    <p style="text-align: left">在您点击“完成”按钮后，将会开始下载文件。<br/>
-    请您选择“允许”，并将文件名修改为您的被试编号发送给主试。<br/>
-    再次感谢您的耐心与配合！</p>`,
+    type: 'html-button-response',
+    stimulus: `
+    在您点击“完成”按钮后，将会开始下载文件。<br/>
+    请您允许下载，并将文件名修改为您的编号后发送给主试。<br/><br/>
+    再次感谢您的耐心与配合！
+    <p style="color: DodgerBlue">o(≧v≦)o</p>`,
     choices: ['完成']
 }
 
@@ -267,7 +266,6 @@ var main_timeline = [
 
 jsPsych.init({
     timeline: main_timeline,
-    show_progress_bar: true,
     on_finish: function() {
         jsPsych.data.get().localSave('csv', `请重命名为您的编号并发给主试.csv`) // download from browser // 把csv后缀改掉
         document.getElementById('jspsych-content').innerHTML += '测验结束，感谢您的参与！'

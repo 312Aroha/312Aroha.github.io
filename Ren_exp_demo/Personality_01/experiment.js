@@ -94,7 +94,7 @@ var welcome = {
 var warmup = {
     type: 'html-button-response',
     stimulus: '<p>请做好准备……</p>',
-    choices: ['<span id="timer">1</span>秒后继续'],/* 暂时先改成1s，正式为3s */
+    choices: ['<span id="timer">3</span>秒后继续'],/* 正式为3s */
     button_html: btn_html_timer
 }
 
@@ -399,6 +399,16 @@ var OpenEnded = {
     on_finish: function(data) { addRespFromSurvey(data) }
 }
 
+/* 添加下载提醒 */
+var DownloadReminding = {
+    type: 'html-button-response',
+    stimulus: `
+    在您点击“完成”按钮后，将会开始下载文件。<br/>
+    请您允许下载，并将文件名修改为您的编号后发送给主试。<br/><br/>
+    再次感谢您的耐心与配合！
+    <p style="color: DodgerBlue">o(≧v≦)o</p>`,
+    choices: ['完成']
+}
 
 /* Combine Timelines */
 
@@ -423,6 +433,7 @@ var main_timeline = [
     demographics,
     surveys,
     OpenEnded,
+    DownloadReminding,
     close_fullscreen,
 ]
 
