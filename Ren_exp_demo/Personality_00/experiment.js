@@ -1,6 +1,7 @@
 /**
- * Author:
+ * Original Author:
  * Bao H.-W.-S. (https://psychbruce.github.io)
+ * Adopted by Ren xy
  */
 
 

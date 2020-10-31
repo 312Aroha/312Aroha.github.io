@@ -1,6 +1,7 @@
 /**
- * Author:
+ * Original Author:
  * Bao H.-W.-S. (https://psychbruce.github.io)
+ * Adopted by Ren xy
  */
 
 
@@ -94,7 +95,7 @@ var welcome = {
 var warmup = {
     type: 'html-button-response',
     stimulus: '<p>请做好准备……</p>',
-    choices: ['<span id="timer">1</span>秒后继续'],/* 暂时先改成1s，正式为3s */
+    choices: ['<span id="timer">3</span>秒后继续'],/* 暂时先改成1s，正式为3s */
     button_html: btn_html_timer
 }
 
@@ -208,7 +209,7 @@ var Item_5 = {
     randomize_order: false
 }
 
-var Item_6_7_8_9 = {
+var Item_6_7_8 = {
     timeline: [{
         type: 'html-button-response',
         data: jsPsych.timelineVariable('data'),
@@ -241,21 +242,11 @@ var Item_6_7_8_9 = {
         B&ensp;&ensp;不论怎样，尼禄皇帝一定精神错乱。<br/>
         C&ensp;&ensp;使用锡铅合金是罗马皇帝的特权。<br/>
         D&ensp;&ensp;铅中毒在罗马帝国时代的居民中很常见。</p>`},
-        { data: { i:9}, s: '<p style = "font: 16pt FangSong; text-align: left; color = grey">第9题和第10题使用下图：</p>' + 
-        "<image src = '第9、10题.png' width=681 height=550 /><br/><br/>" +
-        `<p style="font: 18pt 微软雅黑; text-align: left; width:900px; margin:0 auto;text-indent:-2em">
-        <b>9&ensp;&emsp;根据上图，如果你正在十层高的旅馆第四层的房间看电视，突然听到火警警报，你很可能：
-        </b><br/><br/>
-        A&ensp;&ensp;从楼梯出去。<br/>
-        B&ensp;&ensp;睡觉。<br/>
-        C&ensp;&ensp;从电梯出去。<br/>
-        D&ensp;&ensp;待在房间里。<br/>
-        E&ensp;&ensp;摸门的温度。</p>`},//有图片字体大小改为18pt
     ],
     randomize_order: false
 }
 
-var Item_10_11_12_13_14_15 = {
+var Item_9_10_11_12_13_14_15 = {
     timeline: [{
         type: 'html-button-response',
         data: jsPsych.timelineVariable('data'),
@@ -266,6 +257,16 @@ var Item_10_11_12_13_14_15 = {
         post_trial_gap: 50
     }],
     timeline_variables: [
+        { data: { i:9}, s: '<p style = "font: 16pt FangSong; text-align: left; color = grey">第9题和第10题使用下图：</p>' + 
+        "<image src = '第9、10题.png' width=681 height=550 /><br/><br/>" +
+        `<p style="font: 18pt 微软雅黑; text-align: left; width:900px; margin:0 auto;text-indent:-2em">
+        <b>9&ensp;&emsp;根据上图，如果你正在十层高的旅馆第四层的房间看电视，突然听到火警警报，你很可能：
+        </b><br/><br/>
+        A&ensp;&ensp;从楼梯出去。<br/>
+        B&ensp;&ensp;睡觉。<br/>
+        C&ensp;&ensp;从电梯出去。<br/>
+        D&ensp;&ensp;待在房间里。<br/>
+        E&ensp;&ensp;摸门的温度。</p>`},//有图片字体大小改为18pt
         { data: { i:10}, s: '<p style = "font: 16pt FangSong; text-align: left; color = grey">第9题和第10题使用下图：</p>' + 
         "<image src = '第9、10题.png' width=681 height=550 /><br/><br/>" +
         `<p style="font: 18pt 微软雅黑; text-align: left; width:900px; margin:0 auto;text-indent:-2.5em">
@@ -287,7 +288,7 @@ var Item_10_11_12_13_14_15 = {
         E&ensp;&ensp;结论，“公司存在的首要目的，即使不是唯一目的，是为其所有者谋利益”。</p>`},
         { data: { i:12}, s: `
         <p style="font: 20pt 微软雅黑; text-align: left; width:900px; margin:0 auto;text-indent:-2.5em">
-        <b>12&ensp;&emsp;“对州立大学快乐学前班的研究表明，参加9个月全日制快乐学前班的孩子在预备一年级的标准化测试中，平均得分58分。研究也表明那些只在上午上学、为期9个月的4岁孩子的平均成绩为52分；只在下午上学、为期9个月的4岁孩子的平均成绩为51分。第二个研究对象是参加了9个月的全日制教会学前班的4岁孩子，研究表明这些孩子在同样测试中的平均成绩54分。第三个研究对象是那些没有参加过学前班学习、来自低收入家庭的孩子，他们在同样的考试中平均成绩是32分。32分同其他分数相比呈显著性差异。”根据这一数据能得出的最可能的科学假设是：
+        <b>12&ensp;&emsp;“对州立大学快乐学前班的研究表明，参加9个月全日制快乐学前班的孩子在预备一年级的标准化测试中，平均得分58分。研究也表明那些只在上午上学、为期9个月的4岁孩子的平均成绩为52分；只在下午上学、为期9个月的4岁孩子的平均成绩为51分。第二个研究对象是参加了9个月的全日制教会学前班的4岁孩子，研究表明这些孩子在同样测试中的平均成绩为54分。第三个研究对象是那些没有参加过学前班学习、来自低收入家庭的孩子，他们在同样的考试中平均成绩是32分。32分同其他分数相比呈显著性差异。”根据这一数据能得出的最可能的科学假设是：
         </b><br/><br/>
         A&ensp;&ensp;一个得了50分以上的孩子已为上小学预备级做好了准备。<br/>
         B&ensp;&ensp;在一个似真假设得出之前需要更多的测试。<br/>
@@ -434,7 +435,7 @@ var Item_21_22 = {
         { data: { i:21}, s: '<p style = "font: 16pt FangSong; text-align: left; color = grey">第21题使用下图：</p>' + 
         "<image src = '第21题.png' width=415 height=150 /><br/><br/>" +
         `<p style="font: 18pt 微软雅黑; text-align: left; width:900px; margin:0 auto;text-indent:-2.5em">
-        <b>21&ensp;&emsp;桌子上有3张三角形的卡片。毎张的两面都印着1个字母。为了证明论断：“如果一面印着字母K另一面印着母B。”永远为真，必须翻哪张或哪几张卡片？
+        <b>21&ensp;&emsp;桌子上有3张三角形的卡片。毎张的两面都印着1个字母。为了证明论断：“如果一面印着字母K，那么另一面则印着字母B。”永远为真，必须翻哪张或哪几张卡片？
         </b><br/><br/>
         A&ensp;&ensp;只翻第1张。<br/>
         B&ensp;&ensp;只第2张。<br/>
@@ -491,7 +492,7 @@ var Item_23_24_25_26_27_28_29_30 = {
         D&ensp;&ensp;坏思维。因为法律明文规定保护儿童的权益更为重要。</p>`},
         { data: { i:26}, s: '<p style = "font: 16pt FangSong; text-align: left; color = grey">26题和27题相互联系。</p><br/>' +
         `<p style="font: 20pt 微软雅黑; text-align: left; width:900px; margin:0 auto;text-indent:-2.5em">
-        <b>26&ensp;&emsp;往返于机场与租车部之间有一部满载10人的公交车。现有36人在租车部等着去机场，有14人在机场等着去租车部。如果公交车从机场出发，途中再无他人乘车，公共车要在机场和租车部之间跑多少次才能把这50人运到他们的目的地？
+        <b>26&ensp;&emsp;往返于机场与租车部之间有一部满载10人的公交车。现有36人在租车部等着去机场，有14人在机场等着去租车部。如果公交车从机场出发，途中再无他人乘车，公交车要在机场和租车部之间跑多少次才能把这50人运到他们的目的地？
         </b><br/><br/>
         A&ensp;&ensp;5<br/>
         B&ensp;&ensp;6<br/>
@@ -618,6 +619,22 @@ var Item_32_33_34 = {
     randomize_order: false
 }
 
+//自信心报告
+
+//添加自信心报告
+var Confidence = {
+    type: 'survey-html-form',
+    data: { varname: 'Confidence' },
+    preamble: '测验已全部完成！<br/><br/>',
+    html: `
+    <p style="font: 18pt 宋体; text-align: left; width:300px; margin:0 auto"><br/>
+    我的正确率约为 <input name="Accuracy" type="number" style="width:50px;" placeholder="1~100" min=1 max=100 
+    oninput="if(value.length>3) value=value.slice(0,3)" required /> %<br/><br/>
+    我的分数大概排前 <input name="Rank" type="number" style="width:50px;" placeholder="1~100" min=1 max=100 
+    oninput="if(value.length>3) value=value.slice(0,3)" required /> %</p>`,
+    button_label: '继续'
+};
+
 var OpenEnded = {
     type: 'survey-text',
     data: { varname: 'OpenEnded' },
@@ -651,8 +668,8 @@ var surveys = {
         Item_1,
         Item_2_3_4,
         Item_5,
-        Item_6_7_8_9,
-        Item_10_11_12_13_14_15,
+        Item_6_7_8,
+        Item_9_10_11_12_13_14_15,
         Item_16_17,
         Item_18,
         Item_19_20,
@@ -670,6 +687,7 @@ var main_timeline = [
     warmup,
     surveys,
     OpenEnded,
+    Confidence,
     DownloadReminding,
     close_fullscreen,
 ]

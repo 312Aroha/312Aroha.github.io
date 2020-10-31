@@ -1,8 +1,8 @@
 /**
- * Author:
+ * Original Author:
  * Bao H.-W.-S. (https://psychbruce.github.io)
+ * Adopted by Ren xy
  */
-
 
 /* Global Variables */
 
@@ -172,7 +172,7 @@ var Subject_Number = {
 }
 
 
-var Big_Five = {
+var BFAS = {
     timeline: [{
         type: 'html-button-response',
         data: jsPsych.timelineVariable('data'),
@@ -182,8 +182,7 @@ var Big_Five = {
         请表明您对该陈述的同意程度<br/>
         （1 = 非常不同意，5 = 非常同意）</p>`,
         choices: ['1', '2', '3', '4', '5'],
-        on_finish: function(data) { addRespFromButtonScale(data, 'Big_Five') 
-        jsPsych.setProgressBar(0.85)},
+        on_finish: function(data) { addRespFromButtonScale(data, 'BFAS')},
         post_trial_gap: 50
     }],
     timeline_variables: [
@@ -212,6 +211,20 @@ var CCTDI = {
     ],
     randomize_order: true
 }
+
+//添加自信心报告
+var Confidence = {
+    type: 'survey-html-form',
+    data: { varname: 'Confidence' },
+    preamble: '测验已全部完成！<br/><br/>',
+    html: `
+    <p style="font: 18pt 宋体; text-align: left; width:300px; margin:0 auto"><br/>
+    我的正确率约为 <input name="Accuracy" type="number" style="width:50px;" placeholder="1~100" min=1 max=100 
+    oninput="if(value.length>3) value=value.slice(0,3)" required /> %<br/><br/>
+    我的分数大概排前 <input name="Rank" type="number" style="width:50px;" placeholder="1~100" min=1 max=100 
+    oninput="if(value.length>3) value=value.slice(0,3)" required /> %</p>`,
+    button_label: '继续'
+};
 
 var OpenEnded = {
     type: 'survey-text',
@@ -246,16 +259,17 @@ var DownloadReminding = {
 var surveys = {
     timeline: [
         instr_6, CCTDI,
-        instr_5, Big_Five,
+        instr_5, BFAS,
     ]
 }
 
 var main_timeline = [
     set_html_style,
-    open_fullscreen,
+    /*open_fullscreen,
     welcome,
     warmup,
-    surveys,
+    surveys,*/
+    Confidence,
     OpenEnded,
     DownloadReminding,
     close_fullscreen,
