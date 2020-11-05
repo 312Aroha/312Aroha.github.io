@@ -96,10 +96,9 @@ var Subject_Number = {
     type: 'survey-html-form',
     data: {varname: 'Subject_Number'},
     preamble: 
-    `<p style = "font: 20pt 宋体">
-    请输入您的编号：</p>`,
+    `<p>请输入您的编号：</p>`,
     html:`
-    <p><input name = "Q0" type = "number" placeholder = "4位数字" 
+    <p><input name = "Q0" type = "number" placeholder = "4位数字" style="width:60px;"
     oninput="if(value.length>4) value=value.slice(0,4)" required /></p>`,//不知道如何设置至少输入4位数
     button_label: '继续',
     on_finish: function(data) { addRespFromSurvey(data) }
