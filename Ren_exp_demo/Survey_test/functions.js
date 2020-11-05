@@ -49,34 +49,6 @@ function addRespFromSurvey(data, parse_int = false) {
     data.response = (parse_int) ? resp.match(/\d+/) : resp
 }
 
-function replaceComma(data, sep = '|') {
-    // only for single response ('Q0' in survey-plugin responses)
-    data.responses = String(JSON.parse(data.responses).Q0).split(',').join(sep)
-}
-
-function setSliderAttr(event = 'onmouseup') {
-    document.getElementById('jspsych-html-slider-response-response').setAttribute(event, 'addSliderValue()')
-}
-
-function addSliderValue(element_id = 'slider-value') {
-    document.getElementById(element_id).innerHTML = document.getElementById('jspsych-html-slider-response-response').value
-    document.getElementById('jspsych-html-slider-response-next').disabled = false
-}
-
-function MEAN(scale_name, rev = [0], likert = [1, 7], var_i = 'i', var_response = 'response') {
-    var df = jsPsych.data.get().filter({ scale: scale_name }).values() // raw data array (modifiable)
-    var sum = 0
-    for (var i in df) { // or: for (var i = 0; i < df.length; i++) {...}
-        // df[i][j] or df[i]['varname'] or df[i].varname
-        if (rev.includes(df[i][var_i]) == false) {
-            sum += df[i][var_response]
-        } else {
-            sum += likert[0] + likert[1] - df[i][var_response]
-        }
-    }
-    return sum / df.length
-}
-
 
 /* JS Functions from the R package 'jspsychr' */
 

@@ -94,31 +94,21 @@ var welcome = {
 
 var warmup = {
     type: 'html-button-response',
-    stimulus: '<p>请做好准备……</p>',
-    choices: ['<span id="timer">3</span>秒后继续'],/* 正式为3s */
+    stimulus: `
+    <p style="text-align: left">
+    同学您好，感谢您参加本研究。<br/><br/>
+    本问卷分为两个部分，第一部分为36道自评题，第二部分为70道自评题。<br/><br/>
+    请您先填写个人基本信息，谢谢您的配合和耐心！</p>`,
+    choices: ['<span id="timer">3</span>秒后继续'],
     button_html: btn_html_timer
 }
 
-var instr_1 = {
-    type:'instructions',
-    pages:[
-        `<p style="text-align: left">
-        同学您好，感谢您参加本研究。<br/><br/>
-        本问卷分为两个部分，第一部分为70道自评题，第二部分为36道自评题。<br/><br/>
-        请您先填写个人基本信息，谢谢您的配合和耐心！</p>`,
-    ],
-    show_clickable_nav: true,
-    allow_backward: false,
-    button_label_previous: '返回',
-    button_label_next: '继续'
-}
 var instr_5 = {
     type: 'instructions',
     pages: [
         `<p style="text-align: left">
-        指导语：<br/>
-        下面有36条陈述，<br/>
-        请表明您对这些陈述的同意程度。<br/><br/>
+        接下来将会呈现36条陈述，请表明您对这些陈述的同意程度。<br/><br/></p>
+        <p style="text-align: left; width:300px; margin:0 auto">        
         1 = 非常不同意<br/>
         2 = 比较不同意<br/>
         3 = 既不同意也不反对<br/>
@@ -135,9 +125,8 @@ var instr_6 = {
     type: 'instructions',
     pages: [
         `<p style="text-align: left">
-        指导语：<br/>
-        下面有70条陈述，<br/>
-        请表明您对这些陈述的赞同程度。<br/><br/>
+        接下来有70条陈述，请表明您对这些陈述的赞同程度。<br/><br/></p>
+        <p style="text-align: left; width:300px; margin:0 auto">
         1 = 非常不赞同<br/>
         2 = 不赞同<br/>
         3 = 不太赞同<br/>
@@ -166,7 +155,7 @@ var Subject_Number = {
     data: {varname: 'Subject_Number'},
     preamble: '您的编号',
     html:`
-    <p><input name = "Q0" type = "number" placeholder = "4位数字" 
+    <p><input name = "Q0" type = "number" placeholder = "4位数字" style="width:60px;"
     oninput="if(value.length>4) value=value.slice(0,4)" required /></p>`,//不知道如何设置至少输入4位数
     button_label: '继续',
     on_finish: function(data) { addRespFromSurvey(data) }
@@ -185,7 +174,7 @@ var Age = {
     data: { varname: 'Age' },
     preamble: '您的年龄',
     html: `
-    <p><input name="Q0" type="number" placeholder="18~99" min=18 max=99
+    <p><input name="Q0" type="number" placeholder="18~99" min=18 max=99 style="width:50px;"
     oninput="if(value.length>2) value=value.slice(0,2)" required /></p>`,
     button_label: '继续',
     on_finish: function(data) { addRespFromSurvey(data) }
@@ -196,7 +185,7 @@ var Major = {
     data: { varname: 'Major' },
     preamble: '您的专业',
     html: `
-    <p><select name="Q0" size=10>
+    <p><select name="Q0" size=14 style = "font-size: 13pt">
     <option>哲学</option>
     <option>经济学</option>
     <option>法学</option>
@@ -415,14 +404,14 @@ var DownloadReminding = {
 
 var demographics = {
     timeline: [
-        instr_1, Subject_Number, Sex, Age, Major, Now_Level, Expect_Level,
+        Subject_Number, Sex, Age, Major, Now_Level, Expect_Level,
     ]
 }
 
 var surveys = {
     timeline: [
-        instr_6, CCTDI,
         instr_5, BFAS,
+        instr_6, CCTDI,
     ]
 }
 

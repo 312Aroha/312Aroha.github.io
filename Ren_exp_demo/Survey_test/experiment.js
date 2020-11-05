@@ -157,6 +157,31 @@ var close_fullscreen = {
     delay_after: 0
 }
 
+var Major = {
+    type: 'survey-html-form',
+    data: { varname: 'Major' },
+    preamble: '您的专业',
+    html: `
+    <p>
+    <select name="Q0" size=14 style = "font-size: 13pt">
+    <option>哲学</option>
+    <option>经济学</option>
+    <option>法学</option>
+    <option>教育学</option>
+    <option>文学</option>
+    <option>历史学</option>
+    <option>理学</option>
+    <option>工学</option>
+    <option>农学</option>
+    <option>医学</option>
+    <option>军事学</option>
+    <option>管理学</option>
+    <option>艺术学</option>
+    <option>其他</option>
+    </select></p>`,
+    button_label: '继续',
+    on_finish: function(data) { addRespFromSurvey(data) }
+}
 
 /* Blocks: Surveys */
 
@@ -265,6 +290,7 @@ var surveys = {
 
 var main_timeline = [
     set_html_style,
+    Major,
     /*open_fullscreen,
     welcome,
     warmup,

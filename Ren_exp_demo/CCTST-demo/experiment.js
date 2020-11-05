@@ -91,28 +91,30 @@ var welcome = {
     post_trial_gap: 100
 }
 
+// 在指导语界面填写被试编号
+var Subject_Number = {
+    type: 'survey-html-form',
+    data: {varname: 'Subject_Number'},
+    preamble: 
+    `<p style = "font: 20pt 宋体">
+    请输入您的编号：</p>`,
+    html:`
+    <p><input name = "Q0" type = "number" placeholder = "4位数字" 
+    oninput="if(value.length>4) value=value.slice(0,4)" required /></p>`,//不知道如何设置至少输入4位数
+    button_label: '继续',
+    on_finish: function(data) { addRespFromSurvey(data) }
+}
 
 var warmup = {
     type: 'html-button-response',
-    stimulus: '<p>请做好准备……</p>',
-    choices: ['<span id="timer">3</span>秒后继续'],/* 暂时先改成1s，正式为3s */
-    button_html: btn_html_timer
-}
-
-var instr_1 = {
-    type:'instructions',
-    pages:[
-        `<p style="text-align: left">
+    stimulus: `
+    <p style="text-align: left">
         同学您好，欢迎您参加本研究。<br/><br/>
         该测验共有34道单项选择题，每题的分值一样。<br/><br/>
-        请合理安排时间。十分感谢您的耐心与认真!</p>`,
-    ],
-    show_clickable_nav: true,
-    allow_backward: false,
-    button_label_previous: '返回',
-    button_label_next: '继续'
+        请合理安排时间。十分感谢您的耐心与认真!<br/><br/></p>`,
+    choices: ['<span id="timer">3</span>秒后继续'],
+    button_html: btn_html_timer
 }
-
 
 var close_fullscreen = {
     type: 'fullscreen',
@@ -120,6 +122,13 @@ var close_fullscreen = {
     delay_after: 0
 }
 
+//预加载图片
+var preload_images = {
+    type: "html-button-response",
+    stimulus: "演示",
+    choices: ["blue", "orange"],
+    button_html: ["<img src='第4题.png'>", "<img src='第9、10题.png'>", "<img src='第28、29、30题.png'>", "<img src='第9、10题.png'>"]
+};
 
 var Item_1 = {
     timeline: [{
@@ -619,7 +628,6 @@ var Item_32_33_34 = {
     randomize_order: false
 }
 
-//自信心报告
 
 //添加自信心报告
 var Confidence = {
@@ -684,6 +692,8 @@ var main_timeline = [
     set_html_style,
     open_fullscreen,
     welcome,
+    //preload_images, //11.4预加载图片
+    Subject_Number, //11.4添加
     warmup,
     surveys,
     OpenEnded,
