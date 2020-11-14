@@ -7,15 +7,14 @@
 
 /* Global Variables */
 
-const btn_html_timer =
-    `<style onload="tid=setInterval(timer, 1000)"></style>
+const btn_html_timer_1 =
+    `<style onload="tid=setInterval(timer_1, 1000)"></style>
      <button onclick="clearInterval(tid)" class="jspsych-btn" disabled=true>%choice%</button>`
 
-const feedback_right = `<span style="position: absolute; top: 55%; left: 0; right: 0; color: green"> √ </span>`
-
-const feedback_wrong = `<span style="position: absolute; top: 55%; left: 0; right: 0; color: red"> X </span>`
-
-const subID = jsPsych.randomization.randomID(8)
+//对应下载提醒中的倒计时
+const btn_html_timer_2 =
+    `<style onload="tid=setInterval(timer_2, 1000)"></style>
+    <button onclick="clearInterval(tid)" class="jspsych-btn" disabled=true>%choice%</button>`
 
 
 /* Blocks: HTML DOM Settings */
@@ -99,8 +98,8 @@ var warmup = {
     同学您好，感谢您参加本研究。<br/><br/>
     本问卷分为两个部分，第一部分为36道自评题，第二部分为70道自评题。<br/><br/>
     请您先填写个人基本信息，谢谢您的配合和耐心！</p>`,
-    choices: ['<span id="timer">3</span>秒后继续'],
-    button_html: btn_html_timer
+    choices: ['<span id="timer_1">3</span>秒后继续'],
+    button_html: btn_html_timer_1
 }
 
 var instr_5 = {
@@ -185,7 +184,7 @@ var Major = {
     data: { varname: 'Major' },
     preamble: '您的专业',
     html: `
-    <p><select name="Q0" size=14 style = "font-size: 13pt">
+    <p><select required name="Q0" size=14 style="font-size: 13pt">
     <option>哲学</option>
     <option>经济学</option>
     <option>法学</option>
@@ -211,10 +210,10 @@ var Now_Level = {
     preamble: '您目前的受教育水平<br>', //棒！！可以修改为radio//选项左对齐
     html: `
     <p style="text-align: left"> 
-    <input name="Q0" type="radio" value="本科">本科<br>
-    <input name="Q0" type="radio" value="硕士">硕士<br>
-    <input name="Q0" type="radio" value="博士">博士<br>
-    <input name="Q0" type="radio" value="博士以上">博士以上</p>`,
+    <input name="Q0" type="radio" required="required" value="本科">本科<br>
+    <input name="Q0" type="radio" required="required" value="硕士">硕士<br>
+    <input name="Q0" type="radio" required="required" value="博士">博士<br>
+    <input name="Q0" type="radio" required="required" value="博士以上">博士以上</p>`,
     button_label: '继续',
     on_finish: function(data) { addRespFromSurvey(data) }
 }
@@ -222,13 +221,13 @@ var Now_Level = {
 var Expect_Level = {
     type: 'survey-html-form',
     data: { varname: 'Expect_Level' },
-    preamble: '您<span style="color:DimGray">期望</span>的受教育水平',//灰色强调“目前” 
+    preamble: '您期望的受教育水平',
     html: `
     <p style="text-align: left"> 
-    <input name="Q0" type="radio" value="本科">本科<br>
-    <input name="Q0" type="radio" value="硕士">硕士<br>
-    <input name="Q0" type="radio" value="博士">博士<br>
-    <input name="Q0" type="radio" value="博士以上">博士以上</p>`,
+    <input name="Q0" type="radio" required="required" value="本科">本科<br>
+    <input name="Q0" type="radio" required="required" value="硕士">硕士<br>
+    <input name="Q0" type="radio" required="required" value="博士">博士<br>
+    <input name="Q0" type="radio" required="required" value="博士以上">博士以上</p>`,
     button_label: '继续',
     on_finish: function(data) { addRespFromSurvey(data) }
 }
@@ -318,7 +317,7 @@ var CCTDI = {
         { data: { i:15}, s: '在小组讨论时，若某人的见解被其他人认为是错误的，他便没有权利去表达意见。' },
         { data: { i:16}, s: '外国人应该学习我们的文化，而不是要我们去了解他们的文化。' },
         { data: { i:17}, s: '他人不应该强逼我去为自己的意见作辩护。' },
-        { data: { i:18}, s: '对不同的世界观（例如:进化论、有神论）持开放态度，并不是那么重要。' },
+        { data: { i:18}, s: '对不同的世界观（例如：进化论、有神论）持开放态度，并不是那么重要。' },
         { data: { i:19}, s: '各人有权利发表他们的意见，但我不会理会他们。' },
         { data: { i:20}, s: '我不会怀疑众人都认为是理所当然的事。' },
         { data: { i:21}, s: '当他人只用浅薄的论据去为好的构思护航，我会感到着急。' },
@@ -341,31 +340,31 @@ var CCTDI = {
         { data: { i:38}, s: '人们说我作决定时过于冲动。' },
         { data: { i:39}, s: '人们认为我作决定时犹豫不决。' },
         { data: { i:40}, s: '我对争议性话题的意见，大多跟随最后与我谈论的人。' },
-        { data: { i:41}, s: '我欣赏自己拥有精确的思维能力' },
+        { data: { i:41}, s: '我欣赏自己拥有精确的思维能力。' },
         { data: { i:42}, s: '需要思考而非全凭记忆作答的测验较适合我。' },
-        { data: { i:43}, s: '我的好奇心和求知欲受到别人欣赏' },
+        { data: { i:43}, s: '我的好奇心和求知欲受到别人欣赏。' },
         { data: { i:44}, s: '面对问题时，因为我能做出客观的分析，所以我的同辈会找我作决定。' },
         { data: { i:45}, s: '对自己能够想出有创意的选择，我很满足。' },
         { data: { i:46}, s: '做决定时，其他人期待我去制定适当的准则作指引。' },
         { data: { i:47}, s: '我的求知欲很强。' },
-        { data: { i:48}, s: '对自己能够了解其他人的观点，我很满足' },
+        { data: { i:48}, s: '对自己能够了解其他人的观点，我很满足。' },
         { data: { i:49}, s: '当问题变得棘手时，其他人会期待我继续处理。' },
-        { data: { i:50}, s: '我不害怕在课堂上提问' },
+        { data: { i:50}, s: '我不害怕在课堂上提问。' },
         { data: { i:51}, s: '研究新事物能使我的人生更丰富。' },
         { data: { i:52}, s: '当面对一个重要抉择前，我会先尽力搜集一切有关的资料。' },
         { data: { i:53}, s: '我期待去面对富有挑战性的事物。' },
         { data: { i:54}, s: '解决难题是富有趣味性的。' },
         { data: { i:55}, s: '我喜欢去找出事物是如何运作的。' },
         { data: { i:56}, s: '无论什么话题，我都渴望知道更多相关的内容。' },
-        { data: { i:57}, s: '我会尽量去学习每一样东西，即使我不知道它们何时有用' },
-        { data: { i:58}, s: '学校里大部分的课程是枯燥无味的，不值得去选修' },
+        { data: { i:57}, s: '我会尽量去学习每一样东西，即使我不知道它们何时有用。' },
+        { data: { i:58}, s: '学校里大部分的课程是枯燥无味的，不值得去选修。' },
         { data: { i:59}, s: '学校里的必修科目是浪费时间的。' },
         { data: { i:60}, s: '主动尝试去解决各样的难题，并非那么重要。' },
-        { data: { i:61}, s: '最好的论点，往往来自于对某个问题的瞬间感觉' },
+        { data: { i:61}, s: '最好的论点，往往来自于对某个问题的瞬间感觉。' },
         { data: { i:62}, s: '所谓真相，不外乎个人的看法。' },
         { data: { i:63}, s: '付出高的代价（例如：金钱、时间、精力），便一定能换取更好的意见。' },
         { data: { i:64}, s: '当我持开放的态度，便不知道什么是真、什么是假。' },
-        { data: { i:65}, s: '如果可能的话，我会尽量避免阅读' },
+        { data: { i:65}, s: '如果可能的话，我会尽量避免阅读。' },
         { data: { i:66}, s: '对我自己所相信的事，我是坚信不疑的。' },
         { data: { i:67}, s: '用“比喻”去理解问题，像在公路上驾驶小船。' },
         { data: { i:68}, s: '解决难题的最好方法是向别人问取答案。' },
@@ -393,11 +392,12 @@ var OpenEnded = {
 var DownloadReminding = {
     type: 'html-button-response',
     stimulus: `
-    在您点击“完成”按钮后，将会开始下载文件。<br/>
-    请您允许下载，并将文件名修改为您的编号后发送给主试。<br/><br/>
+    在点击“下载”按钮后，将会开始下载文件。<br/>
+    请允许下载，并将文件名修改为您的编号。<br/><br/>
     再次感谢您的耐心与配合！
     <p style="color: DodgerBlue">o(≧v≦)o</p>`,
-    choices: ['完成']
+    choices: ['<span id="timer_2">3</span>秒'],
+    button_html: btn_html_timer_2
 }
 
 /* Combine Timelines */
