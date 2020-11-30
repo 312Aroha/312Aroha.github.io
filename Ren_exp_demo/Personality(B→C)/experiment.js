@@ -16,11 +16,6 @@ const btn_html_timer_2 =
     `<style onload="tid=setInterval(timer_2, 1000)"></style>
     <button onclick="clearInterval(tid)" class="jspsych-btn" disabled=true>%choice%</button>`
 
-// 知情同意中的倒计时
-const btn_html_timer_3 =
-    `<style onload="tid=setInterval(timer_3, 1000)"></style>
-    <button onclick="clearInterval(tid)" class="jspsych-btn" disabled=true>%choice%</button>`
-
 
 /* Blocks: HTML DOM Settings */
 
@@ -65,38 +60,6 @@ var open_fullscreen = {
     button_label: '点击这里全屏开始',
     delay_after: 100
 }
-
-/* Block: Consent */
-var consent_pre = {
-    type: 'html-button-response',
-    stimulus: `
-    <p style="text-align: center">
-    同学您好，感谢您参加本测验。<br/><br/>
-    测验将在您同意后开始。</p>`, 
-    choices: ['阅读知情同意书']
-}
-
-var consent_read = {
-    type: 'html-button-response',
-    data: {varname: 'consent_read'},
-    stimulus: `
-    <p style="text-align: left">
-    本部分的知情同意书为电子版,包含线上和线下的所有部分,请您仔细阅读。<br/><br/></p>`+
-    "<image src = '知情同意书.png' width=800 height=2593/>", 
-    choices: ['<span id="timer_3">5</span>秒后继续'],//11.17正式5s
-    button_html: btn_html_timer_3
-}
-
-var consent_option = {
-    type: 'html-button-response',
-    data: {varname: 'consent_option'},
-    stimulus: `<p>您是否同意展开线上部分的研究? </p>
-    <p style="font: 18pt 华文中宋; color: FireBrick">
-    (本次同意仅代表您愿意完成线上部分，线下部分将提供纸质版知情同意书，以确保您愿意继续参与本研究。）</p>`, 
-    choices: ['同意', '不同意'],
-    on_finish: function(data) { consent_reconfirm(data) }
-}
-
 
 /* Blocks: demographics */
 var demographics_pre = {
@@ -192,17 +155,18 @@ var Expect_Level = {
     on_finish: function(data) { addRespFromSurvey(data) }
 }
 
+
 var welcome = {
-    type: 'html-button-response',
+    type: 'html-keyboard-response',
     stimulus: `
     <p style="font: bold 32pt 微软雅黑; color: #B22222">
     欢迎参与我们的研究</p>
-    <p style="font: 20pt 微软雅黑; color: black"><br/><br/>
-    <b>过程中请勿退出全屏</b><br/><br/></p>
+    <p style="font: 20pt 微软雅黑; color: black"><br/>
+    <按空格键继续><br/>
+    <b>实验过程中请勿退出全屏</b><br/><br/></p>
     <p style="font: 20pt 华文中宋; color: grey">
     华东师范大学心理与认知科学学院<br/>2020年</p>`,
-    choices: ['继续'],
-    button_html:'<button class="jspsych-btn" onclick="handleFullScreen()">%choice%</button>',//alert退出全屏之后，继续全屏
+    choices: [' '],
     post_trial_gap: 100
 }
 
@@ -611,13 +575,6 @@ var DownloadReminding = {
 
 /* Combine Timelines */
 
-var Consent = {
-    timeline: [
-        consent_pre, 
-        consent_read, 
-        consent_option,
-    ]
-}
 
 var demographics = {
     timeline: [
@@ -653,7 +610,6 @@ var surveys = {
 var main_timeline = [
     set_html_style,
     open_fullscreen,
-    Consent,
     welcome,
     demographics,
     surveys,
