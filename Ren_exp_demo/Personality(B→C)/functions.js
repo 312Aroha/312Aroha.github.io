@@ -17,7 +17,7 @@ function inputDialog(title, default_text) {
     return input
 }
 
-//取消使用
+// 用在demographics_pre
 function timer_1() {
     var second = document.getElementById('timer_1')
     var button = document.getElementsByClassName('jspsych-btn')[0]
@@ -25,7 +25,7 @@ function timer_1() {
         if (second.innerHTML > 1) {
             second.innerHTML = second.innerHTML - 1
         } else {
-            button.innerHTML = '继续'
+            button.innerHTML = '我很认真！开始！'
             button.disabled = false
         }
     }
@@ -45,38 +45,6 @@ function timer_2() {
     }
 }
 
-// 知情同意书中的倒计时
-function timer_3() {
-    var second = document.getElementById('timer_3')
-    var button = document.getElementsByClassName('jspsych-btn')[0]
-    if (second != null) {
-        if (second.innerHTML > 1) {
-            second.innerHTML = second.innerHTML - 1
-        } else {
-            button.innerHTML = '我已阅读并知晓上述内容'
-            button.disabled = false
-        }
-    }
-}
-
-// 知情同意确认
-function consent_reconfirm(data) {
-    if(data.button_pressed == 1){
-        var reconfirm = "您选择不同意，表示您不愿意参与本研究。\n\n点击【确认】终止测验\n点击【取消】继续测验"
-        if (confirm(reconfirm) == true){
-            jsPsych.init({
-                timeline: [close_fullscreen],
-                on_finish: function() {
-                    document.getElementById('jspsych-content').innerHTML += '本次测验已终止。'
-                }
-            })    
-        } else {
-            return true
-        }
-    } else {
-        return true
-    }
-}
 
 // 用于attention check
 function attention_check (data) {
@@ -124,11 +92,15 @@ function handleFullScreen() {
 
 function addRespFromButton(data) {
     // compute variables from button-plugin response (for simple item)
+    var d = new Date();
+    data.time = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
     data.response = parseInt(data.button_pressed) + 1 // raw: 0, 1, 2, ...
 }
 
 function addRespFromButtonScale(data, scale_name, var_i = 'i') {
     // compute variables from button-plugin response (for likert scale)
+    var d = new Date();
+    data.time = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
     data.scale = scale_name
     data.varname = scale_name + data[var_i]
     data.response = parseInt(data.button_pressed) + 1 // raw: 0, 1, 2, ...
@@ -136,6 +108,8 @@ function addRespFromButtonScale(data, scale_name, var_i = 'i') {
 
 function addRespFromSurvey(data, parse_int = false) {
     // only for single response ('Q0' in survey-plugin responses)
+    var d = new Date();
+    data.time = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
     var resp = String(JSON.parse(data.responses).Q0)
     data.responses = resp
     data.response = (parse_int) ? resp.match(/\d+/) : resp
@@ -143,6 +117,8 @@ function addRespFromSurvey(data, parse_int = false) {
 
 function replaceComma(data, sep = '|') {
     // only for single response ('Q0' in survey-plugin responses)
+    var d = new Date();
+    data.time = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
     data.responses = String(JSON.parse(data.responses).Q0).split(',').join(sep)
 }
 
@@ -155,3 +131,4 @@ save_locally = function() {
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.send(JSON.stringify({ filedata: data }))
 };
+

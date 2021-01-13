@@ -49,7 +49,7 @@ var open_fullscreen = {
     message: `
     <p style="font: 16pt 微软雅黑; text-align: left; line-height: 1.6em">
     <b>
-    测验将在一个「全屏页面」开始，为确保最佳效果，请你：<br/>
+    测验将在一个「全屏页面」开始，为确保最佳效果，请您：<br/>
     （1）在电脑上进行测验，并使用主流浏览器打开本网页<br/>
     &emsp;&emsp;（Chrome、Edge、Firefox、Safari等，不要用IE）<br/>
     （2）关掉电脑上其他正在运行的程序或将其最小化<br/>
@@ -57,7 +57,7 @@ var open_fullscreen = {
     （4）在测验过程中不要退出全屏<br/>
     （5）务必认真作答<br/><br/>
     </b>
-    如果你同意参与，并且清楚理解了上述要求，请点击开始：
+    如果您同意参与，并且清楚理解了上述要求，请点击开始：
     </p>`,
     button_label: '点击这里全屏开始',
     delay_after: 100
@@ -72,7 +72,7 @@ var welcome = {
     <按空格键继续><br/>
     <b>过程中请勿退出全屏</b><br/><br/></p>
     <p style="font: 20pt 华文中宋; color: grey">
-    华东师范大学心理与认知科学学院<br/>2020年</p>`,
+    华东师范大学心理与认知科学学院<br/>2021年</p>`,
     choices: [' '],
     post_trial_gap: 100
 }
@@ -98,7 +98,8 @@ var warmup = {
         该测验共有34道单项选择题，每题的分值一样。<br/><br/>
         请合理安排时间。十分感谢您的耐心与认真!<br/><br/></p>`,
     choices: ['<span id="timer_1">3</span>秒后继续'],
-    button_html: btn_html_timer_1
+    button_html: btn_html_timer_1,
+    on_finish: function(data) { addRespFromButton(data) },
 }
 
 var close_fullscreen = {
@@ -424,7 +425,7 @@ var CCTST_21_22 = {
         <b>21&ensp;&emsp;桌子上有3张三角形的卡片。毎张的两面都印着1个字母。为了证明论断：“如果一面印着字母K，那么另一面则印着字母B。”永远为真，必须翻哪张或哪几张卡片？
         </b><br/><br/>
         A&ensp;&ensp;只翻第1张。<br/>
-        B&ensp;&ensp;只第2张。<br/>
+        B&ensp;&ensp;只翻第2张。<br/>
         C&ensp;&ensp;1、2、3张都翻。<br/>
         D&ensp;&ensp;翻第1、2张，不翻第3张。<br/>
         E&ensp;&ensp;翻第2、3张，不翻第1张。</p>`},//有图片字体大小改为18pt
@@ -484,8 +485,11 @@ var CCTST_23_24_25_26_27_28_29_30 = {
         B&ensp;&ensp;6<br/>
         C&ensp;&ensp;7<br/>
         D&ensp;&ensp;8</p>`},
-        { data: { i:27}, s: '<p style = "font: 16pt FangSong; text-align: left; color = grey">26题和27题相互联系。</p><br/>' +
-        `<p style="font: 20pt 微软雅黑; text-align: left; width:900px; margin:0 auto;text-indent:-1.6em">
+        { data: { i:27}, s: '<p style = "font: 16pt FangSong; text-align: left; color = grey">26题和27题相互联系。</p>' +
+        `<p style="font: 16pt FangSong; text-align: left; color = Red; width:900px; margin:0 auto;">
+        26&ensp;往返于机场与租车部之间有一部满载10人的公交车。现有36人在租车部等着去机场，有14人在机场等着去租车部。如果公交车从机场出发，途中再无他人乘车，公交车要在机场和租车部之间跑多少次才能把这50人运到他们的目的地？
+        <br/><br/><br/></p>
+        <p style="font: 20pt 微软雅黑; text-align: left; width:900px; margin:0 auto;text-indent:-1.6em">
         <b>27&ensp;&emsp;公交车从机场往租车部开始第二轮的运送时，另外25人到达了机场，他们想乘车到租车部。汽车在每个方向再要跑多少次才能把这增加的25人送到地方？
         </b><br/><br/>
         A&ensp;&ensp;0<br/>
@@ -612,11 +616,16 @@ var Confidence = {
     data: { varname: 'Confidence' },
     preamble: '题目已全部完成！<br/><br/>',
     html: `
-    <p style="font: 18pt 宋体; text-align: left; width:350px; margin:0 auto"><br/>
-    您认为您的正确率约为 <input name="Accuracy" type="number" style="width:50px;" placeholder="1~100" min=1 max=100 
-    oninput="if(value.length>3) value=value.slice(0,3)" required /> %<br/><br/>
-    您的分数大概排前 <input name="Rank" type="number" style="width:50px;" placeholder="1~100" min=1 max=100 
-    oninput="if(value.length>3) value=value.slice(0,3)" required /> %</p>`,
+    <p style="font: 18pt 宋体; text-align: left; width:500px; margin:0 auto"><br/>
+    您认为您的正确率约为 <input name="Accuracy" type="number" style="width:50px;" min=1 max=100 
+    oninput="if(value.length>3) value=value.slice(0,3)" required /> %</p>
+    <p style="font: 10pt 宋体; color: DodgerBlue; text-align: left; width:500px; margin:0 auto">
+    *数字越大代表正确率越高</p>
+    <p style="font: 18pt 宋体; text-align: left; width:500px; margin:0 auto"><br/>
+    您的分数大概排前 <input name="Rank" type="number" style="width:50px;"  min=1 max=100 
+    oninput="if(value.length>3) value=value.slice(0,3)" required /> %</p>
+    <p style="font: 10pt 宋体; color:	MediumSeaGreen; text-align: left; width:500px; margin:0 auto">
+    *数字越小代表排名越靠前</p>`,
     button_label: '继续'
 };
 
@@ -682,7 +691,7 @@ var main_timeline = [
     set_html_style,
     open_fullscreen,
     welcome,
-    Subject_Number, //11.4添加
+    //Subject_Number, //11.4添加
     warmup,
     surveys,
     Confidence,
@@ -696,7 +705,7 @@ var main_timeline = [
 jsPsych.init({
     timeline: main_timeline,
     on_finish: function() {
-        jsPsych.data.get().localSave('csv', `CCTST-[请重命名为您的编号].csv`) // download from browser
-        document.getElementById('jspsych-content').innerHTML += '测验结束，感谢您的参与！'
+      jsPsych.data.get().localSave('csv', `CCTST-[此处修改为您的编号].csv`)
+      document.getElementById('jspsych-content').innerHTML += '测验结束，感谢您的参与！'
     }
 })
